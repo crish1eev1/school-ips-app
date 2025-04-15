@@ -4,7 +4,8 @@ FROM python:3.10-slim
 # Set environment variables
 ENV POETRY_VERSION=1.8.2 \
     PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH="/app"
 
 # Install Poetry
 RUN pip install "poetry==$POETRY_VERSION"
