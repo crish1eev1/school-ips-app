@@ -1,17 +1,21 @@
-[project]
+[tool.poetry]
 name = "school-ips-app"
 version = "0.1.0"
 description = "Interactive app to explore social disparities between public and private schools in France."
-authors = [
-    {name = "Your Name",email = "you@example.com"}
-]
-license = {text = "MIT"}
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
 readme = "README.md"
-requires-python = ">=3.10"
-dependencies = [
-]
+packages = [{ include = "app" }]
 
+[tool.poetry.dependencies]
+python = ">=3.10"
+streamlit = "*"
+pandas = "*"
+plotly = "*"
+geopandas = "*"
+folium = "*"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
