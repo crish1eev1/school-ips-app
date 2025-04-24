@@ -22,21 +22,31 @@ poetry install
 poetry run streamlit run app/main.py
 ```
 
-Then open 👉 http://localhost:8501
+Then open 👈 http://localhost:8501
 
 ---
 
-### 🐳 Docker
+### 🐳 Docker (with Docker Compose v2)
+
+> Make sure you have the **Docker Compose Plugin v2** installed (`docker compose version` should show `v2.x.x`).
 
 ```bash
-# Build the image
-docker build -t school-ips-app .
+# Add yourself to the docker group if needed (then log out and back in)
+sudo usermod -aG docker $USER
 
-# Run the container
-docker run -it --rm -p 8501:8501 school-ips-app
+# Start the app
+cd school-ips-app
+docker compose up --build
 ```
 
-Then open 👉 http://localhost:8501
+Then open 👈 http://localhost:8501
+
+> If you get an error about port 5432 already being in use, kill the process:
+>
+> ```bash
+> sudo lsof -i :5432
+> sudo kill <PID>
+> ```
 
 ---
 
@@ -46,9 +56,15 @@ Then open 👉 http://localhost:8501
 school-ips-app/
 ├── app/
 │   └── main.py           # Main Streamlit app
+├── config/               # DB config (get_db_url)
+├── data_ingestion/       # Raw data fetching logic
+├── transform/            # Data normalization logic
+├── etl/                  # Create/ingest scripts
+├── load/                 # DB insert logic
 ├── pyproject.toml        # Poetry dependencies
 ├── poetry.lock
 ├── Dockerfile
+├── docker-compose.yml
 └── README.md
 ```
 
@@ -58,8 +74,8 @@ school-ips-app/
 
 - 🐍 Python 3.10+
 - 📊 Streamlit
-- 📦 Poetry
-- 🐳 Docker
+- 🛆 Poetry
+- 🐳 Docker + Docker Compose Plugin v2
 - 🌍 Folium, GeoPandas, Plotly
 
 ---

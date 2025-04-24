@@ -1,4 +1,5 @@
-# config/settings.py
-def get_db_url():
-    return "postgresql://user:password@localhost:5432/school_ips"
+# config/settings.import os
+import os
 
+def get_db_url():
+    return os.getenv("DATABASE_URL", "postgresql://user:password@localhost:5432/school_ips")

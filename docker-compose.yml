@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    container_name: school-ips-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: school_ips
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  app:
+    build:
+      context: .
+    container_name: school-ips-app
+    ports:
+      - "8501:8501"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://user:password@db:5432/school_ips
+    command: >
+      sh -c "poetry run streamlit run app/main.py --server.port=8501 --server.address=0.0.0.0"
+
+volumes:
+  pg_data:
