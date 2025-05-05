@@ -3,9 +3,8 @@ import requests
 
 BASE_URL = "https://data.education.gouv.fr/api/records/1.0/search/"
 DATASET = "fr-en-ips-ecoles-ap2022"
-RENTREE = "2022-2023"
 
-def fetch_all_2022_2023_records(batch_size=1000, dept_code=None):
+def fetch_all_records(batch_size=1000, dept_code=None):
     all_records = []
     start = 0
 
@@ -14,7 +13,6 @@ def fetch_all_2022_2023_records(batch_size=1000, dept_code=None):
             "dataset": DATASET,
             "rows": batch_size,
             "start": start,
-            "refine.rentree_scolaire": RENTREE,
         }
         if dept_code:
             params["refine.code_du_departement"] = dept_code

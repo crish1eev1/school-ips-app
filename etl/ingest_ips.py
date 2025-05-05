@@ -1,12 +1,12 @@
 # etl/ingest_ips.py
 
-from data_ingestion.fetch_ips_data import fetch_all_2022_2023_records
+from data_ingestion.fetch_ips_data import fetch_all_records
 from transform.normalize_ips import normalize_records
 from load.load_to_db import insert_records_to_db
 
 def main():
     print("Fetching IPS records...")
-    raw = fetch_all_2022_2023_records()
+    raw = fetch_all_records()
     print(f"Fetched {len(raw)} records.")
 
     print("Normalizing records...")

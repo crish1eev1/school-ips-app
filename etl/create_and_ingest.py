@@ -1,7 +1,7 @@
 # etl/create_and_ingest.py
 import sys
 from sqlalchemy import create_engine, MetaData, Table, Column, String, Float, Integer, text
-from data_ingestion.fetch_ips_data import fetch_all_2022_2023_records
+from data_ingestion.fetch_ips_data import fetch_all_records
 from transform.normalize_ips import normalize_records
 from config.settings import get_db_url
 from sqlalchemy.dialects.postgresql import insert
@@ -43,7 +43,7 @@ def main():
         conn.execute(text("TRUNCATE TABLE ips_ecoles"))
 
     print("Fetching raw data...")
-    raw = fetch_all_2022_2023_records(dept_code=dept_code)
+    raw = fetch_all_records(dept_code=dept_code)
 
     print("Normalizing data...")
     normalized = normalize_records(raw, dept_code=dept_code)
