@@ -8,17 +8,12 @@ def define_ips_table(metadata):
         Column('uai', String, primary_key=True),
         Column('nom_etablissement', String),
         Column('ips', Float),
-        Column('ips_min', Float),
-        Column('ips_max', Float),
-        Column('ips_moy', Float),
-        Column('nb_eleves', Integer),
         Column('secteur', String),
         Column('academie', String),
         Column('departement', String),
         Column('code_du_departement', String),
         Column('code_insee', String),
         Column('nom_commune', String),
-        Column('geo_point', String),
         Column('rentree_scolaire', String),
     )
 
