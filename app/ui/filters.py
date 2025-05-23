@@ -1,5 +1,4 @@
-
-# ui/filters.py
+# app/ui/filters.py
 
 import streamlit as st
 

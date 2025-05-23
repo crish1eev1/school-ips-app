@@ -1,4 +1,4 @@
-# ui/controls.py
+# app/ui/controls.py
 
 import streamlit as st
 import sqlalchemy

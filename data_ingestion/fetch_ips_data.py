@@ -1,4 +1,5 @@
 # data_ingestion/fetch_ips_data.py
+
 import requests
 
 BASE_URL = "https://data.education.gouv.fr/api/records/1.0/search/"

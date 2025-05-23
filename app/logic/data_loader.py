@@ -1,4 +1,4 @@
-# logic/data_loader.py
+# app/logic/data_loader.py
 
 import streamlit as st
 import pandas as pd

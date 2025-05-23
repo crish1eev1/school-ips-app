@@ -1,4 +1,5 @@
-# config/settings.import os
+# config/settings.py
+
 import os
 
 def get_db_url():

@@ -1,4 +1,4 @@
-# logic/database.py
+# app/logic/database.py
 
 import sqlalchemy
 from sqlalchemy import text

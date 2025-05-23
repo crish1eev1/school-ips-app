@@ -1,6 +1,7 @@
 # etl/create_and_ingest.py
+
 import sys
-from sqlalchemy import create_engine, MetaData, Table, Column, String, Float, Integer, text
+from sqlalchemy import create_engine, MetaData, Table, Column, String, Float, Integer, text, UniqueConstraint
 from data_ingestion.fetch_ips_data import fetch_all_records
 from transform.normalize_ips import normalize_records
 from config.settings import get_db_url
@@ -12,7 +13,7 @@ def insert_records_to_db(engine, table, records):
 
     with engine.begin() as conn:
         for row in records:
-            stmt = insert(table).values(**row).on_conflict_do_nothing(index_elements=['uai'])
+            stmt = insert(table).values(**row).on_conflict_do_nothing(index_elements=['uai', 'rentree_scolaire'])
             conn.execute(stmt)
 
 def main():
@@ -22,14 +23,14 @@ def main():
 
     metadata = MetaData()
     ips_table = Table('ips_ecoles', metadata,
-        Column('uai', String, primary_key=True),
+        Column('uai', String, primary_key=False),
         Column('nom_etablissement', String),
         Column('ips', Float),
         Column('ips_departemental_public', Float),
         Column('ips_academique', Float),
         Column('ips_departemental_prive', Float),
         Column('region', String),
-        Column('rentree_scolaire', String),
+        Column('rentree_scolaire', String, primary_key=False),
         Column('code_insee', String),
         Column('nom_commune', String),
         Column('ips_academique_public', Float),
@@ -45,6 +46,7 @@ def main():
         Column('ips_departemental', Float),
         Column('ips_academique_prive', Float),
         Column('num_ligne', Float),
+        UniqueConstraint('uai', 'rentree_scolaire', name='uai_year_unique')  
     )
 
     # ✅ Always ensure the table exists

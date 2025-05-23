@@ -36,6 +36,7 @@ sudo usermod -aG docker $USER
 
 # Start the app
 cd school-ips-app
+docker compose down -v  # if needed
 docker compose up --build
 ```
 
