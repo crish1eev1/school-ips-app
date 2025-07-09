@@ -14,7 +14,7 @@ st.title("📊 French Schools: Public vs Private Social Disparities")
 st.markdown("Explore IPS data (Indice de Position Sociale) across public and private schools in France.")
 
 # Get filter values
-selected_type, selected_dept = sidebar_filters()
+selected_type = sidebar_filters()
 
 # Handle clear DB button
 handle_clear_db_button()

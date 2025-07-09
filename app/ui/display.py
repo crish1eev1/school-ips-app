@@ -21,7 +21,7 @@ def display_data(df: pd.DataFrame):
         selected_schools = st.multiselect(
             "Now select one or more schools to view their IPS evolution:",
             options=school_options,
-            default=school_options[:3]  # Show first 3 by default
+            default=school_options  # Show all by default
         )
 
         if selected_schools:
@@ -32,14 +32,28 @@ def display_data(df: pd.DataFrame):
     else:
         st.info("Please select a city to begin.")
 
+
 def plot_ips_evolution(df: pd.DataFrame):
     df = df.copy()
     df["rentree_scolaire"] = df["rentree_scolaire"].astype(str)
     df["ips"] = pd.to_numeric(df["ips"], errors="coerce")
 
+    # Drop NaN IPS values to avoid issues in min/max
+    df = df.dropna(subset=["ips"])
+
+    if df.empty:
+        st.info("No IPS data available to display.")
+        return
+
+    # Calculate min/max with padding
+    ips_min = df["ips"].min()
+    ips_max = df["ips"].max()
+    padding = (ips_max - ips_min) * 0.05
+    y_domain = [ips_min - padding, ips_max + padding]
+
     chart = alt.Chart(df).mark_line(point=True).encode(
         x=alt.X("rentree_scolaire:N", title="School Year"),
-        y=alt.Y("ips:Q", title="IPS"),
+        y=alt.Y("ips:Q", title="IPS", scale=alt.Scale(domain=y_domain)),
         color=alt.Color("nom_etablissement:N", title="School"),
         tooltip=["nom_etablissement", "rentree_scolaire", "ips", "secteur"]
     ).properties(

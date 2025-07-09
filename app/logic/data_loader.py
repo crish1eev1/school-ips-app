@@ -17,5 +17,5 @@ def load_data(selected_type):
     df = pd.read_sql_query(query, engine)
 
     if selected_type != "All":
-        df = df[df["Type"] == selected_type]
+        df = df[df["secteur"] == selected_type]
     return df
