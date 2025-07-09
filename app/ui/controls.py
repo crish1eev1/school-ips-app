@@ -15,11 +15,11 @@ def handle_clear_db_button():
     if "clear_db_confirmed" not in st.session_state:
         st.session_state.clear_db_confirmed = False
 
-    if st.sidebar.button("🗑️ Clear IPS data from DB"):
+    if st.sidebar.button("🗑️ Clear IPS data from DB and start over"):
         st.session_state.clear_db_confirmed = True
 
     if st.session_state.clear_db_confirmed:
-        st.sidebar.warning("⚠️ This will permanently delete all IPS data.")
+        st.sidebar.warning("⚠️ This will clear all data.")
         col1, col2 = st.sidebar.columns(2)
         if col1.button("✅ Confirm"):
             clear_database()

@@ -10,11 +10,11 @@ from logic.etl_trigger import prompt_for_data
 
 st.set_page_config(page_title="School IPS Explorer", layout="wide")
 
-st.title("📊 French Schools: Public vs Private Social Disparities")
-st.markdown("Explore IPS data (Indice de Position Sociale) across public and private schools in France.")
+st.title("📊 French Schools IPS")
+st.markdown("Explore IPS data (Indice de Position Sociale) across schools for a specific city.")
 
 # Get filter values
-selected_type = sidebar_filters()
+selected_type, selected_school_level = sidebar_filters()
 
 # Handle clear DB button
 handle_clear_db_button()
@@ -23,5 +23,5 @@ handle_clear_db_button()
 if not table_exists() or is_table_empty():
     prompt_for_data()
 else:
-    df = load_data(selected_type)
+    df = load_data(selected_type, selected_school_level)
     display_data(df)

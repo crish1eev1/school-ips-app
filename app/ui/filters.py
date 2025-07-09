@@ -25,5 +25,6 @@ def sidebar_filters():
 
     type_options = ["All"] + types
     selected_type = st.sidebar.radio("School Type", type_options)
-    return selected_type
+    selected_school_level = st.sidebar.radio("School Level", ["All", "école", "collège", "lycée"])
+    return selected_type, selected_school_level
 
