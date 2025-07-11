@@ -13,11 +13,9 @@ st.set_page_config(page_title="School IPS Explorer", layout="wide")
 st.title("📊 French Schools IPS")
 st.markdown("Explore IPS data (Indice de Position Sociale) across schools for a specific city.")
 
-# Get filter values
-selected_type, selected_school_level = sidebar_filters()
-
-# Handle clear DB button
+# Sidebar buttons
 handle_clear_db_button()
+selected_type, selected_school_level = sidebar_filters()
 
 # Main logic
 if not table_exists() or is_table_empty():

@@ -1,5 +1,31 @@
-venv/
+# .gitignore
+
+# Python
 __pycache__/
+*.py[cod]
+venv/
 *.pyc
+
+# Poetry
+poetry.lock
+
+# Streamlit
+.streamlit/
+
+# dbt artifacts
+dbt_school_ips/target/
+dbt_school_ips/dbt_packages/
+dbt_school_ips/logs/
+dbt_school_ips/*.log
+
+# Sensitive config
+dbt_school_ips/profiles.yml
+
+# Others
 .DS_Store
 *chris*
+
+# Docker
+*.tar
+*.pid
+.env

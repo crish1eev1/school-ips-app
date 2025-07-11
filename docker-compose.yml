@@ -1,3 +1,5 @@
+# docker-compose.yml
+
 version: '3.9'
 
 services:
@@ -25,6 +27,18 @@ services:
       DATABASE_URL: postgresql://user:password@db:5432/school_ips
     command: >
       sh -c "poetry run streamlit run app/main.py --server.port=8501 --server.address=0.0.0.0"
+
+  dbt:
+    image: ghcr.io/dbt-labs/dbt-postgres:1.7.13
+    container_name: school-ips-dbt
+    depends_on:
+      - db
+    environment:
+      DBT_PROFILES_DIR: /app/dbt_school_ips
+    volumes:
+      - ./:/app
+    working_dir: /app/dbt_school_ips
+    entrypoint: ["tail", "-f", "/dev/null"]
 
 volumes:
   pg_data:
