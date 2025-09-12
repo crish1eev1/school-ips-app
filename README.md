@@ -8,23 +8,6 @@ Built with [Streamlit](https://streamlit.io), [Poetry](https://python-poetry.org
 
 ## 🚀 Quickstart
 
-### 🔧 Local (with Poetry)
-
-```bash
-# Clone the repo
-git clone git@github.com:crish1eev1/school-ips-app.git
-cd school-ips-app
-
-# Create virtual environment and install dependencies
-poetry install
-
-# Run the app
-poetry run streamlit run app/main.py
-```
-
-Then open 👈 http://localhost:8501
-
----
 
 ### 🐳 Docker (with Docker Compose v2)
 
@@ -51,24 +34,26 @@ Then open 👈 http://localhost:8501
 
 ---
 
-### 📁 Project Structure
+### DBT
+
+Open a shell inside the container and work interactively with dbt
 
 ```
-school-ips-app/
-├── app/
-│   └── main.py           # Main Streamlit app
-├── config/               # DB config (get_db_url)
-├── data_ingestion/       # Raw data fetching logic
-├── transform/            # Data normalization logic
-├── etl/                  # Create/ingest scripts
-├── load/                 # DB insert logic
-├── pyproject.toml        # Poetry dependencies
-├── poetry.lock
-├── Dockerfile
-├── docker-compose.yml
-└── README.md
+docker exec -it school-ips-dbt bash 
+
+dbt debug
+dbt run
+dbt test
 ```
 
+Or, if done without ingestion on the app, run ingestion first:
+
+```
+# Ingest a single department (example: 75 = Paris)
+docker compose run --rm app sh -lc "poetry run python etl/create_and_ingest.py 75"
+
+# Run dbt
+docker compose run --rm dbt run
 ---
 
 ## 🧱 Tech Stack

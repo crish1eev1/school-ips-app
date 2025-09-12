@@ -17,6 +17,8 @@ dbt_school_ips/target/
 dbt_school_ips/dbt_packages/
 dbt_school_ips/logs/
 dbt_school_ips/*.log
+/dbt_packages/
+/target/
 
 # Sensitive config
 dbt_school_ips/profiles.yml
@@ -29,3 +31,4 @@ dbt_school_ips/profiles.yml
 *.tar
 *.pid
 .env
+

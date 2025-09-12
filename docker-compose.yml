@@ -35,10 +35,11 @@ services:
       - db
     environment:
       DBT_PROFILES_DIR: /app/dbt_school_ips
+    user: "${UID}:${GID}"
     volumes:
       - ./:/app
     working_dir: /app/dbt_school_ips
-    entrypoint: ["tail", "-f", "/dev/null"]
+    # entrypoint: ["tail", "-f", "/dev/null"]
 
 volumes:
   pg_data:

@@ -1,9 +1,14 @@
-name: school_ips
-version: '1.0'
-config-version: 2
+name: "school_ips"
+version: "1.0"
+profile: "school_ips"
 
-profile: school_ips
+packages-install-path: dbt_packages
+clean-targets:
+  - "dbt_packages"
+  - "target"
 
-model-paths: ["models"]
-target-path: "target"
-clean-targets: ["target", "dbt_modules"]
+models:
+  school_ips:
+    +materialized: view
+    staging:
+      +schema: staging
