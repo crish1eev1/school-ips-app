@@ -1,8 +1,15 @@
+# dbt_school_ips/models/sources.yml
 version: 2
 
 sources:
+  - name: raw
+    schema: raw
+    tables:
+      - name: raw_ips_ecoles
+      - name: raw_ips_colleges
+      - name: raw_ips_lycees
+
   - name: public
     schema: public
     tables:
       - name: ips_ecoles
-
